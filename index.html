@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--Base-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta charset="utf-8">
+	    <title>Avi Levinshtein Map of fun</title>
+	    <!--CSS-->
+	    <link rel="stylesheet" type="text/css" href="css/index_style.css">
+	    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	    <!--JS-->
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<!-- fix Uncaught SecurityError on chrome
+			see: http://stackoverflow.com/questions/32453806/uncaught-securityerror-failed-to-execute-replacestate-on-history-cannot-be-->
+		<script>
+		    $(document).bind('mobileinit',function(){
+		        $.mobile.changePage.defaults.changeHash = false;
+		        $.mobile.hashListeningEnabled = false;
+		        $.mobile.pushStateEnabled = false;
+		    });
+		</script> 
+		<!-- -->
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9kcDDCtiQM-IEHwac3cY85cdPYbTzpY"></script>
+		<script src="scripts/maps.js"></script>
+	</head>
+	<body>
+		<div id="html_window" class="html_window">
+			<div id="main_container" class="main_container" >
+		    	<div id="locations_container" class="location_container">
+		    		<h2 id="list_title" class="list_title">Locations</h2>
+		    		<input type="text" name="search" placeholder="Search..">
+				    <ul data-role="listview">
+					  <li><a href="#">baba</a></li>
+					  <li><a href="#">avi</a></li>
+					  <li><a href="#">baba</a></li>
+					  <li><a href="#">avi</a></li>
+					  <li><a href="#">baba</a></li>
+					  <li><a href="#">avi</a></li>
+					</ul>
+		    	</div>
+
+		    	<div id="map_container" class="map_container">
+		    		<div id='map' class="map"></div>
+		    	</div>
+	    	</div>
+		</div>
+	</body>
+</html>

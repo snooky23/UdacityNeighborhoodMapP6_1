@@ -1,0 +1,70 @@
+/*General CSS*/
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*List View*/
+ul {
+  text-transform: uppercase;
+}
+h2#list_title {
+	background-color:#F5F5F5;
+	padding: 10px;
+	margin: 0;
+}
+
+input[type=text] {
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../pictures/search-icon-md.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+/*For screens up to 700px*/
+@media only screen and (min-width: 1px) {
+	/*Google maps*/
+	#map_container {
+		width: 100%;
+	}
+}
+
+/*For screens up to 1000px*/
+@media only screen and (min-width: 650px) {
+    #main_container {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 17px;
+	}
+
+	#locations_container {
+		width: 20%;
+		display: visible;
+	}
+
+	/*Google maps*/
+	#map_container {
+		width: 80%;
+	}
+
+	#map{
+	    height: 550px;
+	}
+}
+
+/*For screens above 1000px*/
+@media only screen and (min-width: 900px) {
+    #html_window {
+    	width: 900px;
+    	margin-left: auto;
+    	margin-right: auto;
+    	display: block;
+    }
+}
