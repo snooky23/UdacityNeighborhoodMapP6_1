@@ -19,10 +19,12 @@
 		        $.mobile.pushStateEnabled = false;
 		    });
 		</script> 
-		<!-- -->
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9kcDDCtiQM-IEHwac3cY85cdPYbTzpY"></script>
-		<script src="scripts/maps.js"></script>
+		<script src="scripts/maps.js"></script>	
+		<script src="libs/knockout-3.4.0.js"></script>
+		<script src="scripts/viewModel.js"></script>
+
 	</head>
 	<body>
 		<div id="html_window" class="html_window">
@@ -30,13 +32,8 @@
 		    	<div id="locations_container" class="location_container">
 		    		<h2 id="list_title" class="list_title">Locations</h2>
 		    		<input type="text" name="search" placeholder="Search..">
-				    <ul data-role="listview">
-					  <li><a href="#">baba</a></li>
-					  <li><a href="#">avi</a></li>
-					  <li><a href="#">baba</a></li>
-					  <li><a href="#">avi</a></li>
-					  <li><a href="#">baba</a></li>
-					  <li><a href="#">avi</a></li>
+				    <ul data-role="listview" data-bind="foreach: locationList">
+					  <li data-bind="text: name"></li>
 					</ul>
 		    	</div>
 

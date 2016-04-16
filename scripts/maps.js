@@ -1,3 +1,11 @@
+/*this is my locations*/
+var locations = [
+	{"name": "Arcaffe", "latitude": 32.107476 , "longitude": 34.795951} , 
+	{"name": "University","latitude": 32.113314 , "longitude": 34.804388} ,
+	{"name": "Basketball","latitude": 32.098755 , "longitude": 34.7878} ,
+	{"name": "Running","latitude": 32.107476 , "longitude": 34.795951}
+];
+
 $( document ).ready( function() {
 	//Google Maps JS
 	//Set Map
