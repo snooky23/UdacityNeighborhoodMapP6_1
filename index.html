@@ -21,9 +21,10 @@
 		</script> 
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo9kcDDCtiQM-IEHwac3cY85cdPYbTzpY"></script>
+		<script src="scripts/viewModel.js"></script>
 		<script src="scripts/maps.js"></script>	
 		<script src="libs/knockout-3.4.0.js"></script>
-		<script src="scripts/viewModel.js"></script>
+		
 
 	</head>
 	<body>
@@ -31,7 +32,7 @@
 			<div id="main_container" class="main_container" >
 		    	<div id="locations_container" class="location_container">
 		    		<h2 id="list_title" class="list_title">Locations</h2>
-		    		<input data-bind="textInput: filter" type="text" name="search" placeholder="Search..">
+		    		<input id="input_search" class="input_search" data-bind="textInput: filter" type="text" name="search" placeholder="Search..">
 				    <ul data-role="listview" data-bind="foreach: visiblePlaces">
 					  <li><a data-bind="text: name, click:$parent.setLocation" href="#"></a></li>
 					</ul>
