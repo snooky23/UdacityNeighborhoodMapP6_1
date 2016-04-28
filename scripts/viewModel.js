@@ -1,12 +1,20 @@
 var Location = function(data) {
+	var that = this;
 	this.name = ko.observable(data.name);
 	this.latitude = ko.observable(data.latitude);
 	this.longitude = ko.observable(data.longitude);
+	this.info = ko.observable(data.info);
 	this.marker = new google.maps.Marker({
 	    position: {lat: this.latitude(), lng: this.longitude()},
 	    map: map,
-	    title: location.name
+	    title: location.name,
+	    animation: google.maps.Animation.DROP
 	});
+
+	this.marker.addListener('click', function() {
+		infowindow.setContent(that.info());
+    	infowindow.open(map, that.marker);
+  	});
 }
 
 var ViewModel = function() {
@@ -43,7 +51,10 @@ var ViewModel = function() {
 	this.setLocation = function(clickedLocation) {
 		self.currentLocation(clickedLocation);
 		console.log(self.currentLocation().name());
+		google.maps.event.trigger(self.currentLocation().marker, 'click');
 	};
+
+
 }
 
 // $( document ).ready( function() {

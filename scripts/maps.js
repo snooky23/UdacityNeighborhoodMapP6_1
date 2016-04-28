@@ -1,10 +1,12 @@
 /*this is my locations*/
 var map;
+var infowindow;
 var locations = [
-	{"name": "Arcaffe", "latitude": 32.107476 , "longitude": 34.795951} , 
-	{"name": "University","latitude": 32.113314 , "longitude": 34.804388} ,
-	{"name": "Basketball","latitude": 32.098755 , "longitude": 34.7878} ,
-	{"name": "Running","latitude": 32.107476 , "longitude": 34.795951}
+	{"name": "Arcaffe", "latitude": 32.107476 , "longitude": 34.795951, "info": "My study place"} , 
+	{"name": "University","latitude": 32.113314 , "longitude": 34.804388, "info": "Tel-Aviv University"} ,
+	{"name": "Basketball","latitude": 32.098755 , "longitude": 34.7878, "info": "Where I play Basketball"} ,
+	{"name": "Running","latitude": 32.0964825 , "longitude": 34.773273700000004, "info": "Where I start running"},
+	{"name": "Eretz Eir","latitude": 32.10997339999999 , "longitude": 34.842550200000005, "info": "Where I meet friends"},
 ];
 
 function setMarkerOnMap(marker,showState) {
@@ -38,13 +40,13 @@ $( document ).ready( function() {
 		map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 		//Callout Content
-		// var contentString = 'Some address here..';
+		var contentString = '';
 		//Set window width + content
-		// var infowindow = new google.maps.InfoWindow({
-		// 	content: contentString,
-		// 	maxWidth: 500
-		// });
-
+		infowindow = new google.maps.InfoWindow({
+			content: contentString,
+			maxWidth: 500
+		});
+		
 		// //Add Marker
 		// var marker = new google.maps.Marker({
 		// 	position: myLatlng,
