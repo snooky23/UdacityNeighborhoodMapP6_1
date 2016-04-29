@@ -53,10 +53,4 @@ var ViewModel = function() {
 		console.log(self.currentLocation().name());
 		google.maps.event.trigger(self.currentLocation().marker, 'click');
 	};
-
-
 }
-
-// $( document ).ready( function() {
-//    ko.applyBindings(new ViewModel());
-// });

@@ -1,4 +1,4 @@
-/*this is my locations*/
+/*Global variables and methods*/
 var map;
 var infowindow;
 var locations = [
@@ -8,6 +8,7 @@ var locations = [
 	{"name": "Running","latitude": 32.0964825 , "longitude": 34.773273700000004, "info": "Where I start running"},
 	{"name": "Eretz Eir","latitude": 32.10997339999999 , "longitude": 34.842550200000005, "info": "Where I meet friends"},
 ];
+var isBindingApplied = false;
 
 function setMarkerOnMap(marker,showState) {
 	if(showState) {
@@ -17,7 +18,6 @@ function setMarkerOnMap(marker,showState) {
 	}
 };
 
-var isBindingApplied = false;
 
 $( document ).ready( function() {
 	
@@ -46,22 +46,8 @@ $( document ).ready( function() {
 			content: contentString,
 			maxWidth: 500
 		});
-		
-		// //Add Marker
-		// var marker = new google.maps.Marker({
-		// 	position: myLatlng,
-		// 	map: map,
-		// 	icon: imagePath,
-		// 	title: 'image title'
-		// });
 
-		// google.maps.event.addListener(marker, 'click', function() {
-		// 	infowindow.open(map,marker);
-		// });
-
-		//Resize Function
-		//google.maps.event.addDomListener(window, "resize", initialize);
-
+		//initialize model view after map is avilable
 		if (!isBindingApplied) {
 			ko.applyBindings(new ViewModel());
 			isBindingApplied = true;

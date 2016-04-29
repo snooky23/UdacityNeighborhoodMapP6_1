@@ -10,6 +10,7 @@
 	    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 	    <!--JS-->
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<!-- fix Uncaught SecurityError on chrome
 			see: http://stackoverflow.com/questions/32453806/uncaught-securityerror-failed-to-execute-replacestate-on-history-cannot-be-->
 		<script>
@@ -24,18 +25,30 @@
 		<script src="scripts/viewModel.js"></script>
 		<script src="scripts/maps.js"></script>	
 		<script src="libs/knockout-3.4.0.js"></script>
-		
+		<!--Using the hamburger menu display code-->
+    	<script src="scripts/hamburger.js"></script>	
 
 	</head>
 	<body>
 		<div id="html_window" class="html_window">
 			<div id="main_container" class="main_container" >
 		    	<div id="locations_container" class="location_container">
-		    		<h2 id="list_title" class="list_title">Locations</h2>
-		    		<input id="input_search" class="input_search" data-bind="textInput: filter" type="text" name="search" placeholder="Search..">
-				    <ul data-role="listview" data-bind="foreach: visiblePlaces">
-					  <li><a data-bind="text: name, click:$parent.setLocation" href="#"></a></li>
-					</ul>
+	    			<div id="action_bar">
+	    				<div id="hamburger">
+		    				<div></div>
+	    					<div></div>
+	    					<div></div>
+	    				</div>
+	    				<h2 id="list_title" class="list_title">Locations</h2>
+		    		</div>
+
+		    		<div id="location_bar">
+			    		<input id="input_search" class="input_search" data-bind="textInput: filter" type="text" name="search" placeholder="Search..">
+					    <ul data-role="listview" data-bind="foreach: visiblePlaces">
+						  <li><a data-bind="text: name, click:$parent.setLocation" href="#"></a></li>
+						</ul>
+					</div>
+
 		    	</div>
 
 		    	<div id="map_container" class="map_container">
