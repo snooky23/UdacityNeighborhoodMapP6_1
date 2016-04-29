@@ -1,5 +1,8 @@
 # UdacityNeighborhoodMapP6_1
 
+Github pages link:
+http://snooky23.github.io/UdacityNeighborhoodMapP6_1 
+
 All application components render on-screen in a responsive manner.
 The app include 3 sub layout: 
 1. map
