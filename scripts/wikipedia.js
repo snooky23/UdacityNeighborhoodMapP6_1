@@ -1,3 +1,6 @@
+/**
+* @description load wikipedia links into a special place in the dom
+*/
 function loadWiki() {
 
     var $wikiElem = $('#wikipedia-links');
@@ -31,6 +34,11 @@ function loadWiki() {
     return false;
 };
 
+/**
+* @description get the wikipedia request url
+* @constructor
+* @param {string} city - a city to search
+*/
 function getWikipediaUrl(city){
     return 'https://en.wikipedia.org/w/api.php?&action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
 }

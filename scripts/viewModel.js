@@ -1,3 +1,9 @@
+/**
+* @description represnt a location on google map
+* @param {number} data - gets a json location object
+* @returns {Location}
+*/
+
 var Location = function(data) {
 	var that = this;
 	this.name = ko.observable(data.name);
@@ -17,13 +23,16 @@ var Location = function(data) {
   	});
 }
 
+/**
+* @description Knockout.js model view
+*/
 var ViewModel = function() {
 	var self = this;
 	this.locationList = ko.observableArray([]);
 	this.filter = ko.observable("");
 	this.map = ko.observable(map);
 
-	//Get locations from map.js
+	//Get location from map.js
 	locations.forEach(function(locationItem){
 		self.locationList.push(new Location(locationItem));
 	});

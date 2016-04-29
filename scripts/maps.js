@@ -10,6 +10,11 @@ var locations = [
 ];
 var isBindingApplied = false;
 
+/**
+* @description the method show or remove markers from google map
+* @param {string} marker - a relavent marker
+* @param {string} showState - true to show, false to remove from the map
+*/
 function setMarkerOnMap(marker,showState) {
 	if(showState) {
 		marker.setMap(map);
@@ -23,7 +28,6 @@ $( document ).ready( function() {
 	
 	//Google Maps JS
 	//Set Map
-
 	function initialize() {
 		//set he map accoding to the window height
 		var windowViewPort = $( window ).height();
