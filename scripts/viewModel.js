@@ -33,7 +33,6 @@ var ViewModel = function() {
        return this.locationList().filter(function(place){
            if(!self.filter() || place.name().toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
            		//add marker to map
-           		console.log("place: " + place);
            		console.dir(place);
            		setMarkerOnMap(place.marker,true);
            		return place;
@@ -50,7 +49,6 @@ var ViewModel = function() {
 	//Support clicked location event
 	this.setLocation = function(clickedLocation) {
 		self.currentLocation(clickedLocation);
-		console.log(self.currentLocation().name());
 		google.maps.event.trigger(self.currentLocation().marker, 'click');
 	};
 }

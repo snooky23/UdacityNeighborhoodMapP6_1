@@ -5,6 +5,11 @@ function loadWiki() {
     // clear out old data before new request
     $wikiElem.text("");
     
+    // act on faliuer after 8 sec
+    var wikiReqTimeout = setTimeout(function(){
+        $wikiElem.append('failed to get wiki resources');
+    }, 8000);
+
     // Load wikipedia api
     $.ajax( {
         url: getWikipediaUrl('tel-aviv'),

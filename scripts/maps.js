@@ -29,7 +29,7 @@ $( document ).ready( function() {
 		var windowViewPort = $( window ).height();
 		$("#map").height(windowViewPort - 30);
 
-		var myLatlng = new google.maps.LatLng(32.125192,34.803180);
+		var myLatlng = new google.maps.LatLng(32.113314,34.804388);
 		var mapOptions = {
 			zoom: 13,
 			center: myLatlng,
