@@ -19,7 +19,7 @@ var isBindingApplied = false;
 * @param {string} showState - true to show, false to remove from the map
 */
 function animateCurrentMarker(aMarker) {
-	if(currentMarker != undefined) {
+	if(currentMarker !== undefined) {
 		//set back to red marker
 		currentMarker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
 		currentMarker.setAnimation(null);
