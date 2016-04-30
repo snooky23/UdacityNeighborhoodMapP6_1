@@ -23,20 +23,20 @@ var Location = function(data) {
 		infowindow.setContent(that.info());
     	infowindow.open(map, that.marker);
   	});
-}
+};
 
 /**
 * @description hides marker from google map
 */
 Location.prototype.hideMarker = function() {
-  setMarkerOnMap(this.marker,false);
+  this.marker.setVisible(false);
 };
 
 /**
 * @description show marker on google map
 */
 Location.prototype.showMarker = function() {
-  setMarkerOnMap(this.marker,true);
+  this.marker.setVisible(true);
 };
 
 /**
@@ -44,10 +44,6 @@ Location.prototype.showMarker = function() {
 */
 Location.prototype.getInfoFromWikipedia = function(data) {
 	var that = this;
-    // Load wikipedia api
-    // var wikiReqTimeout = setTimeout(function(){
-    //     $wikiElem.append('failed to get wiki resources');
-    // }, 8000);
 
     var listObject = ko.observable("");
     var initMsg = 
@@ -60,28 +56,11 @@ Location.prototype.getInfoFromWikipedia = function(data) {
 		'</div>';
     var contentString = ko.observable(initMsg);
 
-    // act on faliuer after 5 sec
-    var wikiReqTimeout = setTimeout(function(){
-        listObject(' not avilable for this location due to server timeout');
-        var ans =  
-           	'<div id="content">'+ 
-				'<div id="siteNotice"> </div>'+
-				'<h4 id="firstHeading" class="firstHeading">' + data.name + '</h4>' +
-				'<div id="bodyContent">'+ 
-					'<p><b>' + data.info +'</b>, wiki links:' + listObject() +
-				'</div>'+
-			'</div>';
-
-		contentString(ans);
-    }, 5000);
-
     $.ajax( {
         url: 'https://en.wikipedia.org/w/api.php?&action=opensearch&search=' + data.info + '&format=json&callback=wikiCallback',
         dataType: 'jsonp',
+        timeout: 4000,
         success: function(res) {
-        	//clear timeout first
-			clearTimeout(wikiReqTimeout);
-			
 			// do something with data
 			var wikiArticels = "";
 			var aritcleList = res[1];
@@ -108,8 +87,24 @@ Location.prototype.getInfoFromWikipedia = function(data) {
 
 			contentString(ans);
 		    that.info(contentString());
-        }
+        },
+        error: function(xmlhttprequest, textstatus, message) {
+	        console.log("error");
+	        var ans =  
+           	'<div id="content">'+ 
+				'<div id="siteNotice"> </div>'+
+				'<h4 id="firstHeading" class="firstHeading">' + data.name + '</h4>' +
+				'<div id="bodyContent">'+ 
+					'<p><b>' + data.info +'</b>, wiki links: not been computed due to request error' +
+				'</div>'+
+			'</div>';
+
+			contentString(ans);
+			that.info(contentString());
+    	}
     } );
+	//return a message to be stored before ajax has returned with an answer
+	return contentString();
 };
 /**
 * @description Knockout.js model view
