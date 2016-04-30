@@ -79,3 +79,7 @@ function initialize() {
 		isBindingApplied = true;
 	}
 }
+
+function googleError() {
+	alert("Couldn't upload google map, please contact the administrator :_(");
+}
