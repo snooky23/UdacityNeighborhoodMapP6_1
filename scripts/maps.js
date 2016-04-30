@@ -47,42 +47,35 @@ function animateCurrentMarker(aMarker) {
 	}, 2000);
 }
 
+/**
+* @description the method initialize google map object and applyBindings for the modelView
+*/
+function initialize() {
+	//set he map accoding to the window height
+	var windowViewPort = $( window ).height();
+	$("#map").height(windowViewPort - 30);
 
-
-
-$( document ).ready( function() {
+	var myLatlng = new google.maps.LatLng(32.113314,34.804388);
+	var mapOptions = {
+		zoom: 13,
+		center: myLatlng,
+		disableDoubleClickZoom: true,
+		scrollwheel: false
+	};
 	
-	//Google Maps JS
-	//Set Map
-	function initialize() {
-		//set he map accoding to the window height
-		var windowViewPort = $( window ).height();
-		$("#map").height(windowViewPort - 30);
+	map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-		var myLatlng = new google.maps.LatLng(32.113314,34.804388);
-		var mapOptions = {
-			zoom: 13,
-			center: myLatlng,
-			disableDoubleClickZoom: true,
-			scrollwheel: false
-		};
-		
-		map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	//Callout Content
+	var contentString = '';
+	//Set window width + content
+	infowindow = new google.maps.InfoWindow({
+		content: contentString,
+		maxWidth: 500
+	});
 
-		//Callout Content
-		var contentString = '';
-		//Set window width + content
-		infowindow = new google.maps.InfoWindow({
-			content: contentString,
-			maxWidth: 500
-		});
-
-		//initialize model view after map is avilable
-		if (!isBindingApplied) {
-			ko.applyBindings(new ViewModel());
-			isBindingApplied = true;
-		}
+	//initialize model view after map is avilable
+	if (!isBindingApplied) {
+		ko.applyBindings(new ViewModel());
+		isBindingApplied = true;
 	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-});
+}
