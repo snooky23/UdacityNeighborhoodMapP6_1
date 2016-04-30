@@ -1,7 +1,7 @@
 /**
 * @description load wikipedia links into a special place in the dom
 */
-function loadWiki() {
+function loadWiki(place) {
 
     var $wikiElem = $('#wikipedia-links');
     

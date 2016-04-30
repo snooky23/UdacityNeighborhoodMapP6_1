@@ -9,20 +9,108 @@ var Location = function(data) {
 	this.name = ko.observable(data.name);
 	this.latitude = ko.observable(data.latitude);
 	this.longitude = ko.observable(data.longitude);
-	this.info = ko.observable(data.info);
+	this.info = ko.observable(this.getInfoFromWikipedia(data));
 	this.marker = new google.maps.Marker({
 	    position: {lat: this.latitude(), lng: this.longitude()},
 	    map: map,
 	    title: location.name,
+	    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
 	    animation: google.maps.Animation.DROP
 	});
 
 	this.marker.addListener('click', function() {
+		animateCurrentMarker(that.marker);
 		infowindow.setContent(that.info());
     	infowindow.open(map, that.marker);
   	});
 }
 
+/**
+* @description hides marker from google map
+*/
+Location.prototype.hideMarker = function() {
+  setMarkerOnMap(this.marker,false);
+};
+
+/**
+* @description show marker on google map
+*/
+Location.prototype.showMarker = function() {
+  setMarkerOnMap(this.marker,true);
+};
+
+/**
+* @description show marker on google map
+*/
+Location.prototype.getInfoFromWikipedia = function(data) {
+	var that = this;
+    // Load wikipedia api
+    // var wikiReqTimeout = setTimeout(function(){
+    //     $wikiElem.append('failed to get wiki resources');
+    // }, 8000);
+
+    var listObject = ko.observable("");
+    var initMsg = 
+    	'<div id="content">'+ 
+			'<div id="siteNotice"> </div>'+
+			'<h4 id="firstHeading" class="firstHeading">' + data.name + '</h4>' +
+			'<div id="bodyContent">'+ 
+				'<p><b>' + data.info +'</b>, wiki links: not yet been computed' +
+			'</div>'+
+		'</div>';
+    var contentString = ko.observable(initMsg);
+
+    // act on faliuer after 5 sec
+    var wikiReqTimeout = setTimeout(function(){
+        listObject(' not avilable for this location due to server timeout');
+        var ans =  
+           	'<div id="content">'+ 
+				'<div id="siteNotice"> </div>'+
+				'<h4 id="firstHeading" class="firstHeading">' + data.name + '</h4>' +
+				'<div id="bodyContent">'+ 
+					'<p><b>' + data.info +'</b>, wiki links:' + listObject() +
+				'</div>'+
+			'</div>';
+
+		contentString(ans);
+    }, 5000);
+
+    $.ajax( {
+        url: 'https://en.wikipedia.org/w/api.php?&action=opensearch&search=' + data.info + '&format=json&callback=wikiCallback',
+        dataType: 'jsonp',
+        success: function(res) {
+        	//clear timeout first
+			clearTimeout(wikiReqTimeout);
+			
+			// do something with data
+			var wikiArticels = "";
+			var aritcleList = res[1];
+			for(var i=0, len = aritcleList.length; i<len ; i++){
+			    var articleStr = aritcleList[i];
+			    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+			    wikiArticels =  wikiArticels + '<li><a href="' + url + '">' + articleStr + '</a></li>';
+			}
+
+           	if(wikiArticels.length > 0) {
+           		listObject('<ul>' + wikiArticels + '</ul>');
+           	} else {
+           		listObject(' not avilable for this location');
+           	}
+           	
+           	var ans =  
+	           	'<div id="content">'+ 
+					'<div id="siteNotice"> </div>'+
+					'<h4 id="firstHeading" class="firstHeading">' + data.name + '</h4>' +
+					'<div id="bodyContent">'+ 
+						'<p><b>' + data.info +'</b>, wiki links:' + listObject() +
+					'</div>'+
+				'</div>';
+
+			contentString(ans);
+		    that.info(contentString());
+        }
+    } );
+};
 /**
 * @description Knockout.js model view
 */
@@ -42,12 +130,11 @@ var ViewModel = function() {
        return this.locationList().filter(function(place){
            if(!self.filter() || place.name().toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
            		//add marker to map
-           		console.dir(place);
-           		setMarkerOnMap(place.marker,true);
+           		place.showMarker();
            		return place;
            } else {
            		//remove marker from map
-           		setMarkerOnMap(place.marker,false);
+           		place.hideMarker();
            }
        });
    	},this);  
