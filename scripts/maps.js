@@ -48,18 +48,6 @@ function animateCurrentMarker(aMarker) {
 }
 
 function initialize() {
-	/*
-	*	Avoid "Cannot read property 'offsetWidth' of null",
-	*	usually due to the map div not being rendered before the javascript runs that needs to access it.
-	*   see: http://stackoverflow.com/questions/11740663/google-map-api-uncaught-typeerror-cannot-read-property-offsetwidth-of-null
-	*/
-	//google.maps.event.addDomListener(window, "load", doInitialize);
-	doInitialize();
-}
-/**
-* @description the method initialize google map object and applyBindings for the modelView
-*/
-function doInitialize() {
 	//set he map accoding to the window height
 	var windowViewPort = $( window ).height();
 	$("#map").height(windowViewPort - 30);
