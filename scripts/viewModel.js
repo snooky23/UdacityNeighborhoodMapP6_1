@@ -23,20 +23,20 @@ var Location = function(data) {
 		infowindow.setContent(that.info());
     	infowindow.open(map, that.marker);
   	});
-}
+};
 
 /**
 * @description hides marker from google map
 */
 Location.prototype.hideMarker = function() {
-  setMarkerOnMap(this.marker,false);
+  this.marker.setVisible(false);
 };
 
 /**
 * @description show marker on google map
 */
 Location.prototype.showMarker = function() {
-  setMarkerOnMap(this.marker,true);
+  this.marker.setVisible(true);
 };
 
 /**
@@ -44,10 +44,6 @@ Location.prototype.showMarker = function() {
 */
 Location.prototype.getInfoFromWikipedia = function(data) {
 	var that = this;
-    // Load wikipedia api
-    // var wikiReqTimeout = setTimeout(function(){
-    //     $wikiElem.append('failed to get wiki resources');
-    // }, 8000);
 
     var listObject = ko.observable("");
     var initMsg = 
@@ -81,7 +77,7 @@ Location.prototype.getInfoFromWikipedia = function(data) {
         success: function(res) {
         	//clear timeout first
 			clearTimeout(wikiReqTimeout);
-			
+
 			// do something with data
 			var wikiArticels = "";
 			var aritcleList = res[1];

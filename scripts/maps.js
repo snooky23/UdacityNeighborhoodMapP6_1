@@ -18,19 +18,6 @@ var isBindingApplied = false;
 * @param {string} marker - a relavent marker
 * @param {string} showState - true to show, false to remove from the map
 */
-function setMarkerOnMap(marker,showState) {
-	if(showState) {
-		marker.setMap(map);
-	} else {
-		marker.setMap(null);
-	}
-}
-
-/**
-* @description the method show or remove markers from google map
-* @param {string} marker - a relavent marker
-* @param {string} showState - true to show, false to remove from the map
-*/
 function animateCurrentMarker(aMarker) {
 	if(currentMarker != undefined) {
 		//set back to red marker
